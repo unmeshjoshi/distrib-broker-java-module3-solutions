@@ -38,3 +38,146 @@ compileJava {
     //For jackson to use property based constructor
     options.compilerArgs << '-parameters'
 }
+
+// SimpleKafka Command Applications
+// These tasks allow you to run the command applications using Gradle
+
+task runBroker(type: JavaExec) {
+    group = 'SimpleKafka'
+    description = 'Run a SimpleKafka broker'
+    
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.dist.cmd.BrokerApp'
+    
+    // Default arguments - can be overridden with -PzkAddress, -PbrokerId, and -PhostAddress
+    args = [project.findProperty('zkAddress') ?: 'localhost:2181', 
+            project.findProperty('brokerId') ?: '1',
+            project.findProperty('hostAddress') ?: 'localhost']
+    
+    // JVM options for better performance
+    jvmArgs = ['-Xmx512m', '-Xms256m']
+    
+    // Enable interactive input
+    standardInput = System.in
+}
+
+task runProducer(type: JavaExec) {
+    group = 'SimpleKafka'
+    description = 'Run SimpleKafka interactive producer'
+    
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.dist.cmd.ProducerApp'
+    
+    // Default arguments - can be overridden with -PzkAddress and -PbrokerPort
+    args = [project.findProperty('zkAddress') ?: 'localhost:2181',
+            project.findProperty('brokerPort') ?: '9093']
+    
+    jvmArgs = ['-Xmx256m', '-Xms128m']
+    
+    // Enable interactive input
+    standardInput = System.in
+}
+
+task runConsumer(type: JavaExec) {
+    group = 'SimpleKafka'
+    description = 'Run SimpleKafka interactive consumer'
+    
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.dist.cmd.ConsumerApp'
+    
+    // Default arguments - can be overridden with -PzkAddress and -PbrokerPort
+    args = [project.findProperty('zkAddress') ?: 'localhost:2181',
+            project.findProperty('brokerPort') ?: '9093']
+    
+    jvmArgs = ['-Xmx256m', '-Xms128m']
+    
+    // Enable interactive input
+    standardInput = System.in
+}
+
+// Convenience tasks for common operations
+task createTopic(type: JavaExec) {
+    group = 'SimpleKafka'
+    description = 'Create a topic with specified name, partitions, and replication factor'
+    
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.dist.cmd.TopicCommandApp'
+    
+    args = [project.findProperty('zkAddress') ?: 'localhost:2181',
+            'createTopic',
+            project.findProperty('topicName') ?: 'test-topic',
+            project.findProperty('partitions') ?: '3',
+            project.findProperty('replicationFactor') ?: '2']
+    
+    jvmArgs = ['-Xmx256m', '-Xms128m']
+}
+
+task listTopics(type: JavaExec) {
+    group = 'SimpleKafka'
+    description = 'List all available topics'
+    
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.dist.cmd.TopicCommandApp'
+    
+    args = [project.findProperty('zkAddress') ?: 'localhost:2181', 'listTopics']
+    
+    jvmArgs = ['-Xmx256m', '-Xms128m']
+}
+
+task listBrokers(type: JavaExec) {
+    group = 'SimpleKafka'
+    description = 'List all available brokers'
+    
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.dist.cmd.TopicCommandApp'
+    
+    args = [project.findProperty('zkAddress') ?: 'localhost:2181', 'listBrokers']
+    
+    jvmArgs = ['-Xmx256m', '-Xms128m']
+}
+
+// Demo task that shows usage examples
+task demoHelp {
+    group = 'SimpleKafka'
+    description = 'Show demo usage examples'
+    
+    doLast {
+        println """
+=== SimpleKafka Demo Usage Examples ===
+
+1. Start a broker:
+   ./gradlew runBroker
+   ./gradlew runBroker -PzkAddress=localhost:2181 -PbrokerId=1
+
+2. Start multiple brokers (in different terminals):
+   ./gradlew runBroker -PbrokerId=1
+   ./gradlew runBroker -PbrokerId=2  
+   ./gradlew runBroker -PbrokerId=3
+
+3. Create a topic:
+   ./gradlew createTopic -PtopicName=demo-topic -Ppartitions=3 -PreplicationFactor=2
+
+4. List topics and brokers:
+   ./gradlew listTopics
+   ./gradlew listBrokers
+
+5. Run interactive producer:
+   ./gradlew runProducer -PbrokerPort=9093
+
+6. Run interactive consumer:
+   ./gradlew runConsumer -PbrokerPort=9093
+
+
+=== Complete Demo Workflow ===
+
+Terminal 1: ./gradlew runBroker -PbrokerId=1
+Terminal 2: ./gradlew runBroker -PbrokerId=2  
+Terminal 3: ./gradlew runBroker -PbrokerId=3
+Terminal 4: ./gradlew createTopic -PtopicName=demo-topic -Ppartitions=2 -PreplicationFactor=3
+Terminal 5: ./gradlew runProducer -PbrokerPort=9093
+Terminal 6: ./gradlew runConsumer -PbrokerPort=9093
+
+=====================================
+"""
+    }
+}

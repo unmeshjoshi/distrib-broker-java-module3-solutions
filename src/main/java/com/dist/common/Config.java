@@ -9,8 +9,8 @@ public class Config {
     private final String zkConnect;
     private final List<String> logDirs;
     public int DefaultNumPartitions = 3;
-    private int zkSessionTimeoutMs = 1000;
-    private int zkConnectionTimeoutMs = 1000;
+    private int zkSessionTimeoutMs = 10000;
+    private int zkConnectionTimeoutMs = 10000;
 
     public Config(int brokerId, String hostName, int port, String zkConnect, List<String> logDirs) {
         this.brokerId = brokerId;

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dist.simplekafka.ZkControllerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-07-05T14:09:48" hostname="Unmeshs-MacBook-Pro.local" time="1.042">
+  <properties/>
+  <testcase name="singleNodeBecomesController" classname="com.dist.simplekafka.ZkControllerTest" time="0.1"/>
+  <testcase name="forMultipleNodesOnlyOneBecomesController" classname="com.dist.simplekafka.ZkControllerTest" time="0.092"/>
+  <testcase name="shouldSendUpdateMetadataRequestsToAllBrokers" classname="com.dist.simplekafka.ZkControllerTest" time="0.498"/>
+  <testcase name="shouldSendLeaderAndFollowerRequestsToAllLeaderAndFollowerBrokersForGivenTopicAndPartition" classname="com.dist.simplekafka.ZkControllerTest" time="0.352"/>
+  <system-out><![CDATA[Adding broker = Broker[id=2, host=192.168.0.135, port=53894]
+Adding broker = Broker[id=3, host=192.168.0.135, port=53895]
+Adding broker = Broker[id=2, host=192.168.0.135, port=53922]
+Adding broker = Broker[id=3, host=192.168.0.135, port=53926]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

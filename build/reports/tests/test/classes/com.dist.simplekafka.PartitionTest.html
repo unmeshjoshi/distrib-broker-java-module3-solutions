@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class com.dist.simplekafka.PartitionTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class com.dist.simplekafka.PartitionTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.dist.simplekafka.html">com.dist.simplekafka</a> &gt; PartitionTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">8</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.252s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">shouldAppendMessagesToFileAndReturnOffset</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldAppendToTheEndOfTheFileEvenIfReadBeforeWrite</td>
+<td class="success">0.009s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testReadBeyondHighWatermark</td>
+<td class="success">0.011s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testReadRespectsHighWatermark</td>
+<td class="success">0.208s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testReadWithLogEndIsolation</td>
+<td class="success">0.011s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testReplicaReadUpdatesOffset</td>
+<td class="success">0.010s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testShouldReadMessagesFromSpecificOffset</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testShouldWriteAndReadMessagesInPartition</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2025-07-05 19:39:48,063 Test worker DEBUG Initializing configuration XmlConfiguration[location=/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml]
+2025-07-05 19:39:48,066 Test worker DEBUG Installed script engines
+2025-07-05 19:39:48,066 Test worker DEBUG PluginManager 'Core' found 112 plugins
+2025-07-05 19:39:48,067 Test worker DEBUG PluginManager 'Level' found 0 plugins
+2025-07-05 19:39:48,068 Test worker DEBUG PluginManager 'Lookup' found 13 plugins
+2025-07-05 19:39:48,069 Test worker DEBUG Building Plugin[name=layout, class=org.apache.logging.log4j.core.layout.PatternLayout].
+2025-07-05 19:39:48,073 Test worker DEBUG PluginManager 'TypeConverter' found 26 plugins
+2025-07-05 19:39:48,079 Test worker DEBUG PatternLayout$Builder(pattern=&quot;%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n&quot;, PatternSelector=null, Configuration(/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml), Replace=null, charset=&quot;null&quot;, alwaysWriteExceptions=&quot;null&quot;, disableAnsi=&quot;null&quot;, noConsoleNoAnsi=&quot;null&quot;, header=&quot;null&quot;, footer=&quot;null&quot;)
+2025-07-05 19:39:48,079 Test worker DEBUG PluginManager 'Converter' found 41 plugins
+2025-07-05 19:39:48,080 Test worker DEBUG Building Plugin[name=appender, class=org.apache.logging.log4j.core.appender.ConsoleAppender].
+2025-07-05 19:39:48,083 Test worker DEBUG ConsoleAppender$Builder(target=&quot;SYSTEM_OUT&quot;, follow=&quot;null&quot;, direct=&quot;null&quot;, bufferedIo=&quot;null&quot;, bufferSize=&quot;null&quot;, immediateFlush=&quot;null&quot;, ignoreExceptions=&quot;null&quot;, PatternLayout(%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n), name=&quot;Console&quot;, Configuration(/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml), Filter=null)
+2025-07-05 19:39:48,083 Test worker DEBUG Starting OutputStreamManager SYSTEM_OUT.false.false
+2025-07-05 19:39:48,083 Test worker DEBUG Building Plugin[name=appenders, class=org.apache.logging.log4j.core.config.AppendersPlugin].
+2025-07-05 19:39:48,083 Test worker DEBUG createAppenders(={Console})
+2025-07-05 19:39:48,084 Test worker DEBUG Building Plugin[name=AppenderRef, class=org.apache.logging.log4j.core.config.AppenderRef].
+2025-07-05 19:39:48,085 Test worker DEBUG createAppenderRef(ref=&quot;Console&quot;, level=&quot;null&quot;, Filter=null)
+2025-07-05 19:39:48,087 Test worker DEBUG Building Plugin[name=root, class=org.apache.logging.log4j.core.config.LoggerConfig$RootLogger].
+2025-07-05 19:39:48,088 Test worker DEBUG createLogger(additivity=&quot;null&quot;, level=&quot;INFO&quot;, includeLocation=&quot;null&quot;, ={Console}, ={}, Configuration(/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml), Filter=null)
+2025-07-05 19:39:48,090 Test worker DEBUG Building Plugin[name=loggers, class=org.apache.logging.log4j.core.config.LoggersPlugin].
+2025-07-05 19:39:48,090 Test worker DEBUG createLoggers(={root})
+2025-07-05 19:39:48,090 Test worker DEBUG Configuration XmlConfiguration[location=/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml] initialized
+2025-07-05 19:39:48,090 Test worker DEBUG Starting configuration XmlConfiguration[location=/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml]
+2025-07-05 19:39:48,090 Test worker DEBUG Started configuration XmlConfiguration[location=/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml] OK.
+2025-07-05 19:39:48,091 Test worker DEBUG Shutting down OutputStreamManager SYSTEM_OUT.false.false-1
+2025-07-05 19:39:48,091 Test worker DEBUG Shut down OutputStreamManager SYSTEM_OUT.false.false-1, all resources released: true
+2025-07-05 19:39:48,091 Test worker DEBUG Appender DefaultConsole-1 stopped with status true
+2025-07-05 19:39:48,091 Test worker DEBUG Stopped org.apache.logging.log4j.core.config.DefaultConfiguration@73a8da0f OK
+2025-07-05 19:39:48,133 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579
+2025-07-05 19:39:48,134 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579,component=StatusLogger
+2025-07-05 19:39:48,134 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579,component=ContextSelector
+2025-07-05 19:39:48,135 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579,component=Loggers,name=
+2025-07-05 19:39:48,135 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579,component=Appenders,name=Console
+2025-07-05 19:39:48,136 Test worker DEBUG Reconfiguration complete for context[name=1cf4f579] at URI /Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml (org.apache.logging.log4j.core.LoggerContext@44c79f32) with optional ClassLoader: null
+2025-07-05 19:39:48,136 Test worker DEBUG Shutdown hook enabled. Registering a new one.
+2025-07-05 19:39:48,136 Test worker DEBUG LoggerContext[name=1cf4f579, org.apache.logging.log4j.core.LoggerContext@44c79f32] started OK.
+Updated highwatermark to 4 for [topic1,0] on 1
+Updated highwatermark to 3 for [topic1,0] on 1
+Updated highwatermark to 6 for [topic1,0] on 1
+Updated highwatermark to 4 for [topic1,0] on 1
+Updated highwatermark to 3 for [topic1,0] on 1
+Updated highwatermark to 6 for [topic1,0] on 1
+Updated highwatermark to 4 for [topic1,0] on 1
+Updated highwatermark to 3 for [topic1,0] on 1
+Updated highwatermark to 2 for [topic1,0] on 1
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.10.2</a> at 05-Jul-2025, 7:39:49 pm</p>
+</div>
+</div>
+</body>
+</html>

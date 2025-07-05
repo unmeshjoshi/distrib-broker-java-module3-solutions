@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dist.common.JsonSerDesTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-07-05T14:09:47" hostname="Unmeshs-MacBook-Pro.local" time="0.075">
+  <properties/>
+  <testcase name="serializesInetAddressAndPort" classname="com.dist.common.JsonSerDesTest" time="0.075"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

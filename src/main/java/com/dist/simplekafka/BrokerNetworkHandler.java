@@ -5,6 +5,8 @@ import com.dist.net.RequestOrResponse;
 
 import java.io.IOException;
 import java.net.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Logger;
 
@@ -54,14 +56,18 @@ public class BrokerNetworkHandler {
         private final BrokerNetworkHandler socketServer;
         private final AtomicBoolean isRunning = new AtomicBoolean(true);
         private ServerSocket serverSocket;
+        private final ExecutorService threadPool;
 
         public TcpListener(InetAddressAndPort localEp, SimpleKafkaApi kafkaApis, BrokerNetworkHandler socketServer) {
             this.localEp = localEp;
             this.kafkaApis = kafkaApis;
             this.socketServer = socketServer;
+            this.threadPool = Executors.newFixedThreadPool(10); // Limit concurrent connections
         }
 
         public void shutdown() {
+            isRunning.set(false);
+            threadPool.shutdown();
             Utils.swallow(() -> serverSocket.close());
         }
 
@@ -74,7 +80,7 @@ public class BrokerNetworkHandler {
                 logger.info("Listening on " + localEp);
                 while (isRunning.get()) {
                     Socket socket = serverSocket.accept();
-                    new Thread(() -> processConnection(socket)).start();
+                    threadPool.submit(() -> processConnection(socket));
                 }
             });
         }
@@ -85,12 +91,28 @@ public class BrokerNetworkHandler {
                     try {
                         return kafkaApis.handle(request);
                     } catch (Exception e) {
-                        throw e;
+                        logger.warning("Error handling request: " + e.getMessage());
+                        e.printStackTrace();
+                        // Return an error response instead of throwing
+                        return new RequestOrResponse(request.getRequestId(), 
+                            ("Error: " + e.getMessage()).getBytes(), 
+                            request.getCorrelationId());
                     }
                 });
 
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                logger.warning("IO error in connection: " + e.getMessage());
+                // Don't re-throw, just log the error
+            } catch (Exception e) {
+                logger.warning("Unexpected error in connection: " + e.getMessage());
+                e.printStackTrace();
+                // Don't re-throw, just log the error
+            } finally {
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    logger.warning("Error closing socket: " + e.getMessage());
+                }
             }
         }
     }

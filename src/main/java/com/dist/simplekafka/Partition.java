@@ -32,7 +32,16 @@ public class Partition {
     public Partition(Config config, TopicAndPartition topicAndPartition) throws IOException {
         this.config = config;
         this.topicAndPartition = topicAndPartition;
-        this.logFile = new File(config.getLogDirs().get(0),
+        
+        // Create log directory if it doesn't exist
+        File logDir = new File(config.getLogDirs().get(0));
+        if (!logDir.exists()) {
+            if (!logDir.mkdirs()) {
+                throw new IOException("Failed to create log directory: " + logDir.getAbsolutePath());
+            }
+        }
+        
+        this.logFile = new File(logDir,
                 topicAndPartition.topic() + "-" + topicAndPartition.partition() + LogFileSuffix);
         this.log = new Log(logFile);
     }
@@ -48,7 +57,6 @@ public class Partition {
     public List<Log.Message> read(long startOffset, int replicaId,
                                   FetchIsolation isolation) {
         try {
-            System.out.println("Reading partition " + topicAndPartition + " for fetchIsolation " + isolation);
             long endOffset;
             if (isolation == FetchIsolation.FetchHighWatermark) {
                 if (startOffset >= highWatermark) {
@@ -223,6 +231,17 @@ public class Partition {
         public void addPartition(TopicAndPartition topicAndPartition, long initialOffset) {
             topicPartitions.add(topicAndPartition);
         }
+        
+        public void shutdown() {
+            isRunning.set(false);
+            logger.info("Shutting down ReplicaFetcherThread " + name);
+        }
+
+        private int consecutiveFailures = 0;
+        private static final int MAX_CONSECUTIVE_FAILURES = 5;
+        private static final int BASE_RETRY_DELAY_MS = 1000;
+        private static final int MAX_RETRY_DELAY_MS = 30000; // 30 seconds
+        private static final int NORMAL_POLL_INTERVAL_MS = 5000; // 5 seconds
 
         private void doWork() {
             try {
@@ -234,36 +253,76 @@ public class Partition {
                             JsonSerDes.serialize(consumeRequest), correlationId.getAndIncrement());
                     RequestOrResponse response = null;
 
+                    logger.info(String.format("Fetching from leader broker %s:%d for partition %s", 
+                            leaderBroker.host(), leaderBroker.port(), topicPartition));
+                    
                     response = socketClient.sendReceiveTcp(request,
                             InetAddressAndPort.create(leaderBroker.host(), leaderBroker.port()));
 
                     ConsumeResponse consumeResponse = JsonSerDes.deserialize(response.getMessageBodyJson(),
                             ConsumeResponse.class);
-                    for (Map.Entry<String, String> m :
-                            consumeResponse.getMessages().entrySet()) {
-                        logger.info(String.format("Replicating message %s for topic partition %s in broker %d",
-                                m, topicPartition, config.getBrokerId()));
-                        partition.append(m.getKey(), m.getValue());
+                    
+                    int messageCount = consumeResponse.getMessages().size();
+                    if (messageCount > 0) {
+                        logger.info(String.format("Replicating %d messages for partition %s in broker %d",
+                                messageCount, topicPartition, config.getBrokerId()));
+                        for (Map.Entry<String, String> m : consumeResponse.getMessages().entrySet()) {
+                            partition.append(m.getKey(), m.getValue());
+                        }
                     }
+                    
+                    // Reset failure count on success
+                    consecutiveFailures = 0;
                 }
             } catch (IOException e) {
-                logger.error(e);
+                consecutiveFailures++;
+                logger.error(String.format("Failed to connect to leader broker %s:%d for partition %s (attempt %d/%d): %s", 
+                        leaderBroker.host(), leaderBroker.port(), 
+                        topicPartitions.isEmpty() ? "unknown" : topicPartitions.get(0), 
+                        consecutiveFailures, MAX_CONSECUTIVE_FAILURES, e.getMessage()));
+                
+                // Use exponential backoff with jitter
+                int delay = Math.min(BASE_RETRY_DELAY_MS * (1 << Math.min(consecutiveFailures, 10)), MAX_RETRY_DELAY_MS);
+                delay += (int)(Math.random() * 1000); // Add jitter
+                
+                try {
+                    Thread.sleep(delay);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                }
             }
         }
 
         @Override
         public void run() {
-            logger.info("Starting ");
+            logger.info("Starting ReplicaFetcherThread " + name);
             try {
                 while (isRunning.get()) {
-                    doWork();
+                    try {
+                        doWork();
+                        // Use longer polling interval for normal operation
+                        Thread.sleep(NORMAL_POLL_INTERVAL_MS);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        break;
+                    } catch (Exception e) {
+                        // Log the error but don't stop the thread
+                        logger.error("Error in ReplicaFetcherThread " + name + ": " + e.getMessage());
+                        // Use exponential backoff for unexpected errors
+                        try {
+                            Thread.sleep(Math.min(2000 * (1 << Math.min(consecutiveFailures, 5)), 10000));
+                        } catch (InterruptedException ie) {
+                            Thread.currentThread().interrupt();
+                            break;
+                        }
+                    }
                 }
             } catch (Throwable e) {
                 if (isRunning.get()) {
-                    logger.error("Error due to " + e.getMessage());
+                    logger.error("Fatal error in ReplicaFetcherThread " + name + ": " + e.getMessage(), e);
                 }
             }
-            logger.info("Stopped ");
+            logger.info("Stopped ReplicaFetcherThread " + name);
         }
     }
 

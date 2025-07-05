@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dist.simplekafka.ProducerConsumerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-07-05T14:09:48" hostname="Unmeshs-MacBook-Pro.local" time="0.479">
+  <properties/>
+  <testcase name="shouldProduceAndConsumeMessages" classname="com.dist.simplekafka.ProducerConsumerTest" time="0.479"/>
+  <system-out><![CDATA[Adding broker = Broker[id=2, host=192.168.0.135, port=53905]
+Adding broker = Broker[id=3, host=192.168.0.135, port=53907]
+size = 0 in 1
+Handling LeaderAndISR Request in 1 [LeaderAndReplicas[topicPartition=[topic1,0], partitionStateInfo=PartitionInfo[partitionId=2, brokerIds=[Broker[id=2, host=192.168.0.135, port=53905], Broker[id=3, host=192.168.0.135, port=53907], Broker[id=1, host=192.168.0.135, port=53903]]]], LeaderAndReplicas[topicPartition=[topic1,1], partitionStateInfo=PartitionInfo[partitionId=3, brokerIds=[Broker[id=3, host=192.168.0.135, port=53907], Broker[id=1, host=192.168.0.135, port=53903], Broker[id=2, host=192.168.0.135, port=53905]]]]]
+size = 0 in 1
+2025-07-05 19:39:48,999 pool-1-thread-1 DEBUG Initializing configuration XmlConfiguration[location=/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml]
+2025-07-05 19:39:49,000 pool-1-thread-1 DEBUG Installed script engines
+2025-07-05 19:39:49,001 pool-1-thread-1 DEBUG PluginManager 'Core' found 112 plugins
+2025-07-05 19:39:49,001 pool-1-thread-1 DEBUG PluginManager 'Level' found 0 plugins
+2025-07-05 19:39:49,002 pool-1-thread-1 DEBUG PluginManager 'Lookup' found 13 plugins
+2025-07-05 19:39:49,002 pool-1-thread-1 DEBUG Building Plugin[name=layout, class=org.apache.logging.log4j.core.layout.PatternLayout].
+2025-07-05 19:39:49,005 pool-1-thread-1 DEBUG PluginManager 'TypeConverter' found 26 plugins
+2025-07-05 19:39:49,008 pool-1-thread-1 DEBUG PatternLayout$Builder(pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n", PatternSelector=null, Configuration(/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml), Replace=null, charset="null", alwaysWriteExceptions="null", disableAnsi="null", noConsoleNoAnsi="null", header="null", footer="null")
+2025-07-05 19:39:49,009 pool-1-thread-1 DEBUG PluginManager 'Converter' found 41 plugins
+2025-07-05 19:39:49,009 pool-1-thread-1 DEBUG Building Plugin[name=appender, class=org.apache.logging.log4j.core.appender.ConsoleAppender].
+2025-07-05 19:39:49,011 pool-1-thread-1 DEBUG ConsoleAppender$Builder(target="SYSTEM_OUT", follow="null", direct="null", bufferedIo="null", bufferSize="null", immediateFlush="null", ignoreExceptions="null", PatternLayout(%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n), name="Console", Configuration(/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml), Filter=null)
+2025-07-05 19:39:49,011 pool-1-thread-1 DEBUG Starting OutputStreamManager SYSTEM_OUT.false.false
+2025-07-05 19:39:49,011 pool-1-thread-1 DEBUG Building Plugin[name=appenders, class=org.apache.logging.log4j.core.config.AppendersPlugin].
+2025-07-05 19:39:49,012 pool-1-thread-1 DEBUG createAppenders(={Console})
+2025-07-05 19:39:49,012 pool-1-thread-1 DEBUG Building Plugin[name=AppenderRef, class=org.apache.logging.log4j.core.config.AppenderRef].
+2025-07-05 19:39:49,013 pool-1-thread-1 DEBUG createAppenderRef(ref="Console", level="null", Filter=null)
+2025-07-05 19:39:49,013 pool-1-thread-1 DEBUG Building Plugin[name=root, class=org.apache.logging.log4j.core.config.LoggerConfig$RootLogger].
+2025-07-05 19:39:49,014 pool-1-thread-1 DEBUG createLogger(additivity="null", level="INFO", includeLocation="null", ={Console}, ={}, Configuration(/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml), Filter=null)
+2025-07-05 19:39:49,016 pool-1-thread-1 DEBUG Building Plugin[name=loggers, class=org.apache.logging.log4j.core.config.LoggersPlugin].
+2025-07-05 19:39:49,016 pool-1-thread-1 DEBUG createLoggers(={root})
+2025-07-05 19:39:49,017 pool-1-thread-1 DEBUG Configuration XmlConfiguration[location=/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml] initialized
+2025-07-05 19:39:49,017 pool-1-thread-1 DEBUG Starting configuration XmlConfiguration[location=/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml]
+2025-07-05 19:39:49,017 pool-1-thread-1 DEBUG Started configuration XmlConfiguration[location=/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml] OK.
+2025-07-05 19:39:49,017 pool-1-thread-1 DEBUG Shutting down OutputStreamManager SYSTEM_OUT.false.false-1
+2025-07-05 19:39:49,017 pool-1-thread-1 DEBUG Shut down OutputStreamManager SYSTEM_OUT.false.false-1, all resources released: true
+2025-07-05 19:39:49,017 pool-1-thread-1 DEBUG Appender DefaultConsole-1 stopped with status true
+2025-07-05 19:39:49,017 pool-1-thread-1 DEBUG Stopped org.apache.logging.log4j.core.config.DefaultConfiguration@49b7b9b2 OK
+2025-07-05 19:39:49,018 pool-1-thread-1 DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579
+2025-07-05 19:39:49,019 pool-1-thread-1 DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579,component=StatusLogger
+2025-07-05 19:39:49,020 pool-1-thread-1 DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579,component=ContextSelector
+2025-07-05 19:39:49,020 pool-1-thread-1 DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579,component=Loggers,name=
+2025-07-05 19:39:49,020 pool-1-thread-1 DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579,component=Appenders,name=Console
+2025-07-05 19:39:49,021 pool-1-thread-1 DEBUG Reconfiguration complete for context[name=1cf4f579] at URI /Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml (org.apache.logging.log4j.core.LoggerContext@3bb9c45a) with optional ClassLoader: null
+2025-07-05 19:39:49,021 pool-1-thread-1 DEBUG Shutdown hook enabled. Registering a new one.
+2025-07-05 19:39:49,021 pool-1-thread-1 DEBUG LoggerContext[name=1cf4f579, org.apache.logging.log4j.core.LoggerContext@3bb9c45a] started OK.
+2025-07-05 19:39:49,023 pool-1-thread-1 INFO sun.reflect.Reflection.getCallerClass is not supported. ReflectionUtil.getCallerClass will be much slower due to this. java.lang.ClassNotFoundException: sun.reflect.Reflection
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:421)
+	at java.base/java.lang.Class.forName(Class.java:412)
+	at org.apache.logging.log4j.util.LoaderUtil.loadClass(LoaderUtil.java:141)
+	at org.apache.logging.log4j.util.ReflectionUtil.<clinit>(ReflectionUtil.java:65)
+	at org.apache.logging.log4j.core.selector.ClassLoaderContextSelector.getContext(ClassLoaderContextSelector.java:72)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:227)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:45)
+	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:174)
+	at org.apache.logging.log4j.LogManager.getLogger(LogManager.java:618)
+	at com.dist.simplekafka.Partition$ReplicaFetcherThread.<clinit>(Partition.java:211)
+	at com.dist.simplekafka.Partition.createFetcherThread(Partition.java:131)
+	at com.dist.simplekafka.Partition.addFetcher(Partition.java:113)
+	at com.dist.simplekafka.Partition.makeFollower(Partition.java:93)
+	at com.dist.simplekafka.ReplicaManager.makeFollower(ReplicaManager.java:21)
+	at com.dist.simplekafka.SimpleKafkaApi.handleLeaderAndReplicas(SimpleKafkaApi.java:292)
+	at com.dist.simplekafka.SimpleKafkaApi.handle(SimpleKafkaApi.java:189)
+	at com.dist.simplekafka.BrokerNetworkHandler$TcpListener.lambda$processConnection$3(BrokerNetworkHandler.java:92)
+	at com.dist.simplekafka.SocketIO.readHandleRespond(SocketIO.java:37)
+	at com.dist.simplekafka.BrokerNetworkHandler$TcpListener.processConnection(BrokerNetworkHandler.java:90)
+	at com.dist.simplekafka.BrokerNetworkHandler$TcpListener.lambda$run$1(BrokerNetworkHandler.java:83)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+19:39:49.027 [Thread-17] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Starting ReplicaFetcherThread ReplicaFetcherThread--868034334-2
+19:39:49.027 [pool-1-thread-1] INFO  com.dist.simplekafka.Partition - Adding fetcher for partition [topic1,0], initOffset 0 to broker 2 with fetcherId -868034334
+19:39:49.029 [Thread-17] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Fetching from leader broker 192.168.0.135:53905 for partition [topic1,0]
+19:39:49.034 [pool-1-thread-1] INFO  com.dist.simplekafka.Partition - Adding fetcher for partition [topic1,1], initOffset 0 to broker 3 with fetcherId -868034303
+19:39:49.034 [Thread-18] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Starting ReplicaFetcherThread ReplicaFetcherThread--868034303-3
+19:39:49.035 [Thread-18] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Fetching from leader broker 192.168.0.135:53907 for partition [topic1,1]
+Handling LeaderAndISR Request in 3 [LeaderAndReplicas[topicPartition=[topic1,0], partitionStateInfo=PartitionInfo[partitionId=2, brokerIds=[Broker[id=2, host=192.168.0.135, port=53905], Broker[id=3, host=192.168.0.135, port=53907], Broker[id=1, host=192.168.0.135, port=53903]]]], LeaderAndReplicas[topicPartition=[topic1,1], partitionStateInfo=PartitionInfo[partitionId=3, brokerIds=[Broker[id=3, host=192.168.0.135, port=53907], Broker[id=1, host=192.168.0.135, port=53903], Broker[id=2, host=192.168.0.135, port=53905]]]]]
+19:39:49.040 [pool-3-thread-2] INFO  com.dist.simplekafka.Partition - Adding fetcher for partition [topic1,0], initOffset 0 to broker 2 with fetcherId -868034334
+19:39:49.040 [Thread-19] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Starting ReplicaFetcherThread ReplicaFetcherThread--868034334-2
+19:39:49.041 [Thread-19] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Fetching from leader broker 192.168.0.135:53905 for partition [topic1,0]
+Handling LeaderAndISR Request in 2 [LeaderAndReplicas[topicPartition=[topic1,0], partitionStateInfo=PartitionInfo[partitionId=2, brokerIds=[Broker[id=2, host=192.168.0.135, port=53905], Broker[id=3, host=192.168.0.135, port=53907], Broker[id=1, host=192.168.0.135, port=53903]]]], LeaderAndReplicas[topicPartition=[topic1,1], partitionStateInfo=PartitionInfo[partitionId=3, brokerIds=[Broker[id=3, host=192.168.0.135, port=53907], Broker[id=1, host=192.168.0.135, port=53903], Broker[id=2, host=192.168.0.135, port=53905]]]]]
+19:39:49.048 [pool-2-thread-3] INFO  com.dist.simplekafka.Partition - Adding fetcher for partition [topic1,1], initOffset 0 to broker 3 with fetcherId -868034303
+19:39:49.048 [Thread-20] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Starting ReplicaFetcherThread ReplicaFetcherThread--868034303-3
+19:39:49.049 [Thread-20] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Fetching from leader broker 192.168.0.135:53907 for partition [topic1,1]
+Updating metadata for UpdateMetadataRequest{aliveBrokers=[Broker[id=1, host=192.168.0.135, port=53903], Broker[id=3, host=192.168.0.135, port=53907], Broker[id=2, host=192.168.0.135, port=53905]], leaderReplicas=[LeaderAndReplicas[topicPartition=[topic1,0], partitionStateInfo=PartitionInfo[partitionId=2, brokerIds=[Broker[id=2, host=192.168.0.135, port=53905], Broker[id=3, host=192.168.0.135, port=53907], Broker[id=1, host=192.168.0.135, port=53903]]]], LeaderAndReplicas[topicPartition=[topic1,1], partitionStateInfo=PartitionInfo[partitionId=3, brokerIds=[Broker[id=3, host=192.168.0.135, port=53907], Broker[id=1, host=192.168.0.135, port=53903], Broker[id=2, host=192.168.0.135, port=53905]]]]]} on broker1
+Updating metadata for UpdateMetadataRequest{aliveBrokers=[Broker[id=1, host=192.168.0.135, port=53903], Broker[id=3, host=192.168.0.135, port=53907], Broker[id=2, host=192.168.0.135, port=53905]], leaderReplicas=[LeaderAndReplicas[topicPartition=[topic1,0], partitionStateInfo=PartitionInfo[partitionId=2, brokerIds=[Broker[id=2, host=192.168.0.135, port=53905], Broker[id=3, host=192.168.0.135, port=53907], Broker[id=1, host=192.168.0.135, port=53903]]]], LeaderAndReplicas[topicPartition=[topic1,1], partitionStateInfo=PartitionInfo[partitionId=3, brokerIds=[Broker[id=3, host=192.168.0.135, port=53907], Broker[id=1, host=192.168.0.135, port=53903], Broker[id=2, host=192.168.0.135, port=53905]]]]]} on broker3
+Updating metadata for UpdateMetadataRequest{aliveBrokers=[Broker[id=1, host=192.168.0.135, port=53903], Broker[id=3, host=192.168.0.135, port=53907], Broker[id=2, host=192.168.0.135, port=53905]], leaderReplicas=[LeaderAndReplicas[topicPartition=[topic1,0], partitionStateInfo=PartitionInfo[partitionId=2, brokerIds=[Broker[id=2, host=192.168.0.135, port=53905], Broker[id=3, host=192.168.0.135, port=53907], Broker[id=1, host=192.168.0.135, port=53903]]]], LeaderAndReplicas[topicPartition=[topic1,1], partitionStateInfo=PartitionInfo[partitionId=3, brokerIds=[Broker[id=3, host=192.168.0.135, port=53907], Broker[id=1, host=192.168.0.135, port=53903], Broker[id=2, host=192.168.0.135, port=53905]]]]]} on broker2
+size = 3 in 1
+size = 3 in 2
+size = 3 in 3
+]]></system-out>
+  <system-err><![CDATA[Jul 05, 2025 7:39:48 PM com.dist.simplekafka.BrokerNetworkHandler startup
+INFO: Started socket server
+Jul 05, 2025 7:39:48 PM com.dist.simplekafka.BrokerNetworkHandler$TcpListener lambda$run$2
+INFO: Listening on [192.168.0.135,53903]
+Jul 05, 2025 7:39:48 PM com.dist.simplekafka.BrokerNetworkHandler startup
+INFO: Started socket server
+Jul 05, 2025 7:39:48 PM com.dist.simplekafka.BrokerNetworkHandler$TcpListener lambda$run$2
+INFO: Listening on [192.168.0.135,53905]
+Jul 05, 2025 7:39:48 PM com.dist.simplekafka.BrokerNetworkHandler startup
+INFO: Started socket server
+Jul 05, 2025 7:39:48 PM com.dist.simplekafka.BrokerNetworkHandler$TcpListener lambda$run$2
+INFO: Listening on [192.168.0.135,53907]
+Jul 05, 2025 7:39:49 PM com.dist.simplekafka.SimpleProducer produce
+INFO: Produced message key1 -> message1 on leader broker Broker[id=2, host=192.168.0.135, port=53905]. Message offset is 1
+Jul 05, 2025 7:39:49 PM com.dist.simplekafka.SimpleProducer produce
+INFO: Produced message key2 -> message2 on leader broker Broker[id=3, host=192.168.0.135, port=53907]. Message offset is 1
+Jul 05, 2025 7:39:49 PM com.dist.simplekafka.SimpleProducer produce
+INFO: Produced message key3 -> message3 on leader broker Broker[id=2, host=192.168.0.135, port=53905]. Message offset is 2
+]]></system-err>
+</testsuite>

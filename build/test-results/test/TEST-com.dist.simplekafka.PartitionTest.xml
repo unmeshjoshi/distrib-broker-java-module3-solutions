@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dist.simplekafka.PartitionTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2025-07-05T14:09:47" hostname="Unmeshs-MacBook-Pro.local" time="0.252">
+  <properties/>
+  <testcase name="testReadRespectsHighWatermark" classname="com.dist.simplekafka.PartitionTest" time="0.208"/>
+  <testcase name="testReadWithLogEndIsolation" classname="com.dist.simplekafka.PartitionTest" time="0.011"/>
+  <testcase name="testReadBeyondHighWatermark" classname="com.dist.simplekafka.PartitionTest" time="0.011"/>
+  <testcase name="testReplicaReadUpdatesOffset" classname="com.dist.simplekafka.PartitionTest" time="0.01"/>
+  <testcase name="shouldAppendToTheEndOfTheFileEvenIfReadBeforeWrite" classname="com.dist.simplekafka.PartitionTest" time="0.009"/>
+  <testcase name="shouldAppendMessagesToFileAndReturnOffset" classname="com.dist.simplekafka.PartitionTest" time="0.001"/>
+  <testcase name="testShouldWriteAndReadMessagesInPartition" classname="com.dist.simplekafka.PartitionTest" time="0.001"/>
+  <testcase name="testShouldReadMessagesFromSpecificOffset" classname="com.dist.simplekafka.PartitionTest" time="0.001"/>
+  <system-out><![CDATA[2025-07-05 19:39:48,063 Test worker DEBUG Initializing configuration XmlConfiguration[location=/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml]
+2025-07-05 19:39:48,066 Test worker DEBUG Installed script engines
+2025-07-05 19:39:48,066 Test worker DEBUG PluginManager 'Core' found 112 plugins
+2025-07-05 19:39:48,067 Test worker DEBUG PluginManager 'Level' found 0 plugins
+2025-07-05 19:39:48,068 Test worker DEBUG PluginManager 'Lookup' found 13 plugins
+2025-07-05 19:39:48,069 Test worker DEBUG Building Plugin[name=layout, class=org.apache.logging.log4j.core.layout.PatternLayout].
+2025-07-05 19:39:48,073 Test worker DEBUG PluginManager 'TypeConverter' found 26 plugins
+2025-07-05 19:39:48,079 Test worker DEBUG PatternLayout$Builder(pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n", PatternSelector=null, Configuration(/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml), Replace=null, charset="null", alwaysWriteExceptions="null", disableAnsi="null", noConsoleNoAnsi="null", header="null", footer="null")
+2025-07-05 19:39:48,079 Test worker DEBUG PluginManager 'Converter' found 41 plugins
+2025-07-05 19:39:48,080 Test worker DEBUG Building Plugin[name=appender, class=org.apache.logging.log4j.core.appender.ConsoleAppender].
+2025-07-05 19:39:48,083 Test worker DEBUG ConsoleAppender$Builder(target="SYSTEM_OUT", follow="null", direct="null", bufferedIo="null", bufferSize="null", immediateFlush="null", ignoreExceptions="null", PatternLayout(%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n), name="Console", Configuration(/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml), Filter=null)
+2025-07-05 19:39:48,083 Test worker DEBUG Starting OutputStreamManager SYSTEM_OUT.false.false
+2025-07-05 19:39:48,083 Test worker DEBUG Building Plugin[name=appenders, class=org.apache.logging.log4j.core.config.AppendersPlugin].
+2025-07-05 19:39:48,083 Test worker DEBUG createAppenders(={Console})
+2025-07-05 19:39:48,084 Test worker DEBUG Building Plugin[name=AppenderRef, class=org.apache.logging.log4j.core.config.AppenderRef].
+2025-07-05 19:39:48,085 Test worker DEBUG createAppenderRef(ref="Console", level="null", Filter=null)
+2025-07-05 19:39:48,087 Test worker DEBUG Building Plugin[name=root, class=org.apache.logging.log4j.core.config.LoggerConfig$RootLogger].
+2025-07-05 19:39:48,088 Test worker DEBUG createLogger(additivity="null", level="INFO", includeLocation="null", ={Console}, ={}, Configuration(/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml), Filter=null)
+2025-07-05 19:39:48,090 Test worker DEBUG Building Plugin[name=loggers, class=org.apache.logging.log4j.core.config.LoggersPlugin].
+2025-07-05 19:39:48,090 Test worker DEBUG createLoggers(={root})
+2025-07-05 19:39:48,090 Test worker DEBUG Configuration XmlConfiguration[location=/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml] initialized
+2025-07-05 19:39:48,090 Test worker DEBUG Starting configuration XmlConfiguration[location=/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml]
+2025-07-05 19:39:48,090 Test worker DEBUG Started configuration XmlConfiguration[location=/Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml] OK.
+2025-07-05 19:39:48,091 Test worker DEBUG Shutting down OutputStreamManager SYSTEM_OUT.false.false-1
+2025-07-05 19:39:48,091 Test worker DEBUG Shut down OutputStreamManager SYSTEM_OUT.false.false-1, all resources released: true
+2025-07-05 19:39:48,091 Test worker DEBUG Appender DefaultConsole-1 stopped with status true
+2025-07-05 19:39:48,091 Test worker DEBUG Stopped org.apache.logging.log4j.core.config.DefaultConfiguration@73a8da0f OK
+2025-07-05 19:39:48,133 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579
+2025-07-05 19:39:48,134 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579,component=StatusLogger
+2025-07-05 19:39:48,134 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579,component=ContextSelector
+2025-07-05 19:39:48,135 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579,component=Loggers,name=
+2025-07-05 19:39:48,135 Test worker DEBUG Registering MBean org.apache.logging.log4j2:type=1cf4f579,component=Appenders,name=Console
+2025-07-05 19:39:48,136 Test worker DEBUG Reconfiguration complete for context[name=1cf4f579] at URI /Users/unmeshjoshi/work/distrib-broker-java-module3-solutions/build/resources/test/log4j2.xml (org.apache.logging.log4j.core.LoggerContext@44c79f32) with optional ClassLoader: null
+2025-07-05 19:39:48,136 Test worker DEBUG Shutdown hook enabled. Registering a new one.
+2025-07-05 19:39:48,136 Test worker DEBUG LoggerContext[name=1cf4f579, org.apache.logging.log4j.core.LoggerContext@44c79f32] started OK.
+Updated highwatermark to 4 for [topic1,0] on 1
+Updated highwatermark to 3 for [topic1,0] on 1
+Updated highwatermark to 6 for [topic1,0] on 1
+Updated highwatermark to 4 for [topic1,0] on 1
+Updated highwatermark to 3 for [topic1,0] on 1
+Updated highwatermark to 6 for [topic1,0] on 1
+Updated highwatermark to 4 for [topic1,0] on 1
+Updated highwatermark to 3 for [topic1,0] on 1
+Updated highwatermark to 2 for [topic1,0] on 1
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

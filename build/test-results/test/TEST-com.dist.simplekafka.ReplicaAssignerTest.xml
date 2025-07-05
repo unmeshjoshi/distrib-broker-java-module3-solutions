@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dist.simplekafka.ReplicaAssignerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-07-05T14:09:48" hostname="Unmeshs-MacBook-Pro.local" time="0.002">
+  <properties/>
+  <testcase name="testEvenDistributionOfReplicas" classname="com.dist.simplekafka.ReplicaAssignerTest" time="0.002"/>
+  <testcase name="testReplicasAreOnDifferentBrokers" classname="com.dist.simplekafka.ReplicaAssignerTest" time="0.0"/>
+  <testcase name="testCorrectNumberOfPartitionsAndReplicas" classname="com.dist.simplekafka.ReplicaAssignerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

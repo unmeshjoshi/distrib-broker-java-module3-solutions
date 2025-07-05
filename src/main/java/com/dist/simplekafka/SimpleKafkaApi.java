@@ -181,73 +181,81 @@ public class SimpleKafkaApi {
     }
 
     public RequestOrResponse handle(RequestOrResponse request) {
-        switch (request.getRequestId()) {
-            case RequestKeys.LeaderAndIsrKey: {
-                LeaderAndReplicaRequest leaderAndReplicasRequest = JsonSerDes.deserialize(
-                        request.getMessageBodyJson(), LeaderAndReplicaRequest.class);
-                handleLeaderAndReplicas(leaderAndReplicasRequest.leadeReplicas());
-                return new RequestOrResponse(RequestKeys.LeaderAndIsrKey, "".getBytes()
-                        , request.getCorrelationId());
-            }
-            case RequestKeys.UpdateMetadataKey: {
+        try {
+            switch (request.getRequestId()) {
+                case RequestKeys.LeaderAndIsrKey: {
+                    LeaderAndReplicaRequest leaderAndReplicasRequest = JsonSerDes.deserialize(
+                            request.getMessageBodyJson(), LeaderAndReplicaRequest.class);
+                    handleLeaderAndReplicas(leaderAndReplicasRequest.leadeReplicas());
+                    return new RequestOrResponse(RequestKeys.LeaderAndIsrKey, "".getBytes()
+                            , request.getCorrelationId());
+                }
+                case RequestKeys.UpdateMetadataKey: {
 
-                UpdateMetadataRequest updateMetadataRequest = JsonSerDes.deserialize(
-                        request.getMessageBodyJson(), UpdateMetadataRequest.class);
-                System.out.println("Updating metadata for " + updateMetadataRequest + " on broker" + config.getBrokerId());
+                    UpdateMetadataRequest updateMetadataRequest = JsonSerDes.deserialize(
+                            request.getMessageBodyJson(), UpdateMetadataRequest.class);
+                    System.out.println("Updating metadata for " + updateMetadataRequest + " on broker" + config.getBrokerId());
 
-                aliveBrokers = new ArrayList<>(updateMetadataRequest.aliveBrokers());
-                for (LeaderAndReplicas leaderReplica :
-                        updateMetadataRequest.leaderReplicas()) {
+                    aliveBrokers = new ArrayList<>(updateMetadataRequest.aliveBrokers());
+                    for (LeaderAndReplicas leaderReplica :
+                            updateMetadataRequest.leaderReplicas()) {
 
-                    leaderCache.put(leaderReplica.topicPartition(),
-                            leaderReplica.partitionStateInfo());
+                        leaderCache.put(leaderReplica.topicPartition(),
+                                leaderReplica.partitionStateInfo());
+                    }
+                    return new RequestOrResponse(RequestKeys.UpdateMetadataKey,
+                            "".getBytes(), request.getCorrelationId());
                 }
-                return new RequestOrResponse(RequestKeys.UpdateMetadataKey,
-                        "".getBytes(), request.getCorrelationId());
-            }
-            case RequestKeys.GetMetadataKey: {
-                TopicMetadataRequest topicMetadataRequest = JsonSerDes.deserialize(
-                        request.getMessageBodyJson(), TopicMetadataRequest.class);
-                Set<TopicAndPartition> topicAndPartitions = getTopicMetadata(topicMetadataRequest.getTopicName());
-                Map<TopicAndPartition, PartitionInfo> partitionInfo = new HashMap<>();
-                for (TopicAndPartition tp : topicAndPartitions) {
-                    partitionInfo.put(tp, leaderCache.get(tp));
+                case RequestKeys.GetMetadataKey: {
+                    TopicMetadataRequest topicMetadataRequest = JsonSerDes.deserialize(
+                            request.getMessageBodyJson(), TopicMetadataRequest.class);
+                    Set<TopicAndPartition> topicAndPartitions = getTopicMetadata(topicMetadataRequest.getTopicName());
+                    Map<TopicAndPartition, PartitionInfo> partitionInfo = new HashMap<>();
+                    for (TopicAndPartition tp : topicAndPartitions) {
+                        partitionInfo.put(tp, leaderCache.get(tp));
+                    }
+                    TopicMetadataResponse topicMetadata = new TopicMetadataResponse(partitionInfo);
+                    return new RequestOrResponse(RequestKeys.LeaderAndIsrKey, JsonSerDes.serialize(topicMetadata), request.getCorrelationId());
                 }
-                TopicMetadataResponse topicMetadata = new TopicMetadataResponse(partitionInfo);
-                return new RequestOrResponse(RequestKeys.LeaderAndIsrKey, JsonSerDes.serialize(topicMetadata), request.getCorrelationId());
-            }
-            case RequestKeys.ProduceKey: {
-                ProduceRequest produceRequest = JsonSerDes.deserialize(request.getMessageBodyJson(), ProduceRequest.class);
-                Partition partition = replicaManager.getPartition(produceRequest.getTopicAndPartition());
-                long offset = partition.append(
-                        produceRequest.getKey(), produceRequest.getMessage());
-//                waitUntilTrue(() -> offset == partition.highWatermark(),
-//                        "Waiting for message to replicate", 1000, 100);
-                return new RequestOrResponse(RequestKeys.ProduceKey, JsonSerDes.serialize(new ProduceResponse(offset)), request.getCorrelationId());
-            }
-            case RequestKeys.FetchKey: {
-                ConsumeRequest consumeRequest = JsonSerDes.deserialize(request.getMessageBodyJson(), ConsumeRequest.class);
-                Partition partition = replicaManager.getPartition(consumeRequest.getTopicAndPartition());
-                FetchIsolation isolation =
-                        FetchIsolation.valueOf(consumeRequest.getIsolation());
+                case RequestKeys.ProduceKey: {
+                    ProduceRequest produceRequest = JsonSerDes.deserialize(request.getMessageBodyJson(), ProduceRequest.class);
+                    Partition partition = replicaManager.getPartition(produceRequest.getTopicAndPartition());
+                    long offset = partition.append(
+                            produceRequest.getKey(), produceRequest.getMessage());
+    //                waitUntilTrue(() -> offset == partition.highWatermark(),
+    //                        "Waiting for message to replicate", 1000, 100);
+                    return new RequestOrResponse(RequestKeys.ProduceKey, JsonSerDes.serialize(new ProduceResponse(offset)), request.getCorrelationId());
+                }
+                case RequestKeys.FetchKey: {
+                    ConsumeRequest consumeRequest = JsonSerDes.deserialize(request.getMessageBodyJson(), ConsumeRequest.class);
+                    Partition partition = replicaManager.getPartition(consumeRequest.getTopicAndPartition());
+                    FetchIsolation isolation =
+                            FetchIsolation.valueOf(consumeRequest.getIsolation());
 
-                if (isRequestFromReplica(consumeRequest)) {
-                    isolation = FetchLogEnd;
+                    if (isRequestFromReplica(consumeRequest)) {
+                        isolation = FetchLogEnd;
+                    }
+                    List<Log.Message> rows = (partition == null) ? new ArrayList<>() :
+                            partition.read(consumeRequest.getOffset(), consumeRequest.getReplicaId(), isolation);
+                    if (isRequestFromReplica(consumeRequest) && partition != null) {
+                        partition.updateLastReadOffsetAndHighWaterMark(consumeRequest.getReplicaId(), consumeRequest.getOffset());
+                    }
+                    Map<String, String> result = new HashMap<>();
+                    for (Log.Message row : rows) {
+                        result.put(new String(row.key), new String(row.value));
+                    }
+                    ConsumeResponse consumeResponse = new ConsumeResponse(result);
+                    return new RequestOrResponse(RequestKeys.FetchKey, JsonSerDes.serialize(consumeResponse), request.getCorrelationId());
                 }
-                List<Log.Message> rows = (partition == null) ? new ArrayList<>() :
-                        partition.read(consumeRequest.getOffset(), consumeRequest.getReplicaId(), isolation);
-                if (isRequestFromReplica(consumeRequest) && partition != null) {
-                    partition.updateLastReadOffsetAndHighWaterMark(consumeRequest.getReplicaId(), consumeRequest.getOffset());
-                }
-                Map<String, String> result = new HashMap<>();
-                for (Log.Message row : rows) {
-                    result.put(new String(row.key), new String(row.value));
-                }
-                ConsumeResponse consumeResponse = new ConsumeResponse(result);
-                return new RequestOrResponse(RequestKeys.FetchKey, JsonSerDes.serialize(consumeResponse), request.getCorrelationId());
+                default:
+                    throw new IllegalArgumentException("Invalid request: " + request.getRequestId());
             }
-            default:
-                throw new IllegalArgumentException("Invalid request: " + request.getRequestId());
+        } catch (Exception e) {
+            logger.error("Error handling request " + request.getRequestId() + ": " + e.getMessage(), e);
+            // Return an error response instead of throwing
+            return new RequestOrResponse(request.getRequestId(), 
+                ("Error: " + e.getMessage()).getBytes(), 
+                request.getCorrelationId());
         }
     }
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dist.simplekafka.BrokerChangeListenerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-07-05T14:09:47" hostname="Unmeshs-MacBook-Pro.local" time="0.747">
+  <properties/>
+  <testcase name="shouldRemoveBrokerInformationFromController" classname="com.dist.simplekafka.BrokerChangeListenerTest" time="0.553"/>
+  <testcase name="shouldAddNewBrokerInformationToControllerOnChange" classname="com.dist.simplekafka.BrokerChangeListenerTest" time="0.194"/>
+  <system-out><![CDATA[Adding broker = Broker[id=1, host=10.10.10.11, port=8001]
+Removing broker = Broker[id=1, host=10.10.10.11, port=8001]
+]]></system-out>
+  <system-err><![CDATA[log4j:WARN No appenders could be found for logger (org.apache.zookeeper.server.ZooKeeperServer).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+]]></system-err>
+</testsuite>

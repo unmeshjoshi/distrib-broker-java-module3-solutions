@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dist.simplekafka.ServerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-07-05T14:09:47" hostname="Unmeshs-MacBook-Pro.local" time="0.428">
+  <properties/>
+  <testcase name="shouldRegisterItselfToZookeeperOnStartup" classname="com.dist.simplekafka.ServerTest" time="0.31"/>
+  <testcase name="shouldRegisterControllerWithZookeeperAtStartup" classname="com.dist.simplekafka.ServerTest" time="0.117"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[log4j:WARN No appenders could be found for logger (org.apache.zookeeper.server.ZooKeeperServer).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+Jul 05, 2025 7:39:48 PM com.dist.simplekafka.BrokerNetworkHandler startup
+INFO: Started socket server
+Jul 05, 2025 7:39:48 PM com.dist.simplekafka.BrokerNetworkHandler$TcpListener lambda$run$2
+INFO: Listening on [192.168.0.135,53849]
+Jul 05, 2025 7:39:48 PM com.dist.simplekafka.BrokerNetworkHandler startup
+INFO: Started socket server
+Jul 05, 2025 7:39:48 PM com.dist.simplekafka.BrokerNetworkHandler$TcpListener lambda$run$2
+INFO: Listening on [192.168.0.135,53862]
+Jul 05, 2025 7:39:48 PM com.dist.simplekafka.BrokerNetworkHandler startup
+INFO: Started socket server
+Jul 05, 2025 7:39:48 PM com.dist.simplekafka.BrokerNetworkHandler$TcpListener lambda$run$2
+INFO: Listening on [192.168.0.135,53875]
+]]></system-err>
+</testsuite>

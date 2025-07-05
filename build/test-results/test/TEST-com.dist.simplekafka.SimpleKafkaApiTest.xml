@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.dist.simplekafka.SimpleKafkaApiTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2025-07-05T14:09:48" hostname="Unmeshs-MacBook-Pro.local" time="0.101">
+  <properties/>
+  <testcase name="shouldGetNoMessagesWhenNothingIsProducedOnTheTopicPartition" classname="com.dist.simplekafka.SimpleKafkaApiTest" time="0.026"/>
+  <testcase name="shouldCreateLeaderAndFollowerReplicas" classname="com.dist.simplekafka.SimpleKafkaApiTest" time="0.005"/>
+  <testcase name="shouldGetTopicMetadataForGivenTopic" classname="com.dist.simplekafka.SimpleKafkaApiTest" time="0.008"/>
+  <testcase name="shouldConsumeMessagesFromStartOffset" classname="com.dist.simplekafka.SimpleKafkaApiTest" time="0.022"/>
+  <testcase name="testUpdateMetadataCache" classname="com.dist.simplekafka.SimpleKafkaApiTest" time="0.008"/>
+  <testcase name="shouldHandleProduceRequest" classname="com.dist.simplekafka.SimpleKafkaApiTest" time="0.012"/>
+  <testcase name="multipleProduceRequestsShouldIncrementOffset" classname="com.dist.simplekafka.SimpleKafkaApiTest" time="0.019"/>
+  <system-out><![CDATA[Handling LeaderAndISR Request in 0 [LeaderAndReplicas[topicPartition=[topic1,0], partitionStateInfo=PartitionInfo[partitionId=1, brokerIds=[Broker[id=0, host=10.10.10.10, port=8000], Broker[id=1, host=10.10.10.11, port=8000]]]]]
+2025-07-05 19:39:48,241 Test worker INFO sun.reflect.Reflection.getCallerClass is not supported. ReflectionUtil.getCallerClass will be much slower due to this. java.lang.ClassNotFoundException: sun.reflect.Reflection
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:421)
+	at java.base/java.lang.Class.forName(Class.java:412)
+	at org.apache.logging.log4j.util.LoaderUtil.loadClass(LoaderUtil.java:141)
+	at org.apache.logging.log4j.util.ReflectionUtil.<clinit>(ReflectionUtil.java:65)
+	at org.apache.logging.log4j.core.selector.ClassLoaderContextSelector.getContext(ClassLoaderContextSelector.java:72)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:227)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:45)
+	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:174)
+	at org.apache.logging.log4j.LogManager.getLogger(LogManager.java:618)
+	at com.dist.simplekafka.Partition$ReplicaFetcherThread.<clinit>(Partition.java:211)
+	at com.dist.simplekafka.Partition.createFetcherThread(Partition.java:131)
+	at com.dist.simplekafka.Partition.addFetcher(Partition.java:113)
+	at com.dist.simplekafka.Partition.makeFollower(Partition.java:93)
+	at com.dist.simplekafka.ReplicaManager.makeFollower(ReplicaManager.java:21)
+	at com.dist.simplekafka.SimpleKafkaApi.handleLeaderAndReplicas(SimpleKafkaApi.java:292)
+	at com.dist.simplekafka.SimpleKafkaApi.handle(SimpleKafkaApi.java:189)
+	at com.dist.simplekafka.SimpleKafkaApiTest.shouldGetNoMessagesWhenNothingIsProducedOnTheTopicPartition(SimpleKafkaApiTest.java:255)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.BlockJUnit4ClassRunner.runNotIgnored(BlockJUnit4ClassRunner.java:79)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:71)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:49)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:112)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:40)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:54)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:53)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:183)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+
+19:39:48.247 [Test worker] INFO  com.dist.simplekafka.Partition - Adding fetcher for partition [topic1,0], initOffset 0 to broker 1 with fetcherId -868034334
+19:39:48.247 [Thread-3] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Starting ReplicaFetcherThread ReplicaFetcherThread--868034334-1
+19:39:48.249 [Thread-3] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Fetching from leader broker 10.10.10.11:8000 for partition [topic1,0]
+Handling LeaderAndISR Request in 0 [LeaderAndReplicas[topicPartition=[topic1,0], partitionStateInfo=PartitionInfo[partitionId=1, brokerIds=[Broker[id=0, host=10.10.10.10, port=8000], Broker[id=1, host=10.10.10.11, port=8000]]]]]
+19:39:48.258 [Test worker] INFO  com.dist.simplekafka.Partition - Adding fetcher for partition [topic1,0], initOffset 0 to broker 1 with fetcherId -868034334
+19:39:48.258 [Thread-4] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Starting ReplicaFetcherThread ReplicaFetcherThread--868034334-1
+19:39:48.259 [Thread-4] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Fetching from leader broker 10.10.10.11:8000 for partition [topic1,0]
+Handling LeaderAndISR Request in 0 [LeaderAndReplicas[topicPartition=[topic1,0], partitionStateInfo=PartitionInfo[partitionId=1, brokerIds=[Broker[id=0, host=10.10.10.10, port=8000], Broker[id=1, host=10.10.10.11, port=8000]]]]]
+19:39:48.275 [Test worker] INFO  com.dist.simplekafka.Partition - Adding fetcher for partition [topic1,0], initOffset 0 to broker 1 with fetcherId -868034334
+19:39:48.275 [Thread-5] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Starting ReplicaFetcherThread ReplicaFetcherThread--868034334-1
+19:39:48.276 [Thread-5] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Fetching from leader broker 10.10.10.11:8000 for partition [topic1,0]
+Updated highwatermark to 2 for [topic1,0] on 0
+Updating metadata for UpdateMetadataRequest{aliveBrokers=[Broker[id=0, host=10.10.10.10, port=8000], Broker[id=0, host=10.10.10.11, port=8000], Broker[id=0, host=10.10.10.12, port=8000]], leaderReplicas=[LeaderAndReplicas[topicPartition=[topic1,0], partitionStateInfo=PartitionInfo[partitionId=1, brokerIds=[Broker[id=0, host=10.10.10.10, port=8000], Broker[id=1, host=10.10.10.11, port=8000]]]], LeaderAndReplicas[topicPartition=[topic1,1], partitionStateInfo=PartitionInfo[partitionId=1, brokerIds=[Broker[id=0, host=10.10.10.10, port=8000], Broker[id=1, host=10.10.10.11, port=8000]]]]]} on broker0
+Handling LeaderAndISR Request in 0 [LeaderAndReplicas[topicPartition=[topic1,0], partitionStateInfo=PartitionInfo[partitionId=1, brokerIds=[Broker[id=0, host=10.10.10.10, port=8000], Broker[id=1, host=10.10.10.11, port=8000]]]]]
+19:39:48.303 [Test worker] INFO  com.dist.simplekafka.Partition - Adding fetcher for partition [topic1,0], initOffset 0 to broker 1 with fetcherId -868034334
+19:39:48.303 [Thread-6] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Starting ReplicaFetcherThread ReplicaFetcherThread--868034334-1
+19:39:48.303 [Thread-6] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Fetching from leader broker 10.10.10.11:8000 for partition [topic1,0]
+Handling LeaderAndISR Request in 0 [LeaderAndReplicas[topicPartition=[topic1,0], partitionStateInfo=PartitionInfo[partitionId=1, brokerIds=[Broker[id=0, host=10.10.10.10, port=8000], Broker[id=1, host=10.10.10.11, port=8000]]]]]
+19:39:48.315 [Test worker] INFO  com.dist.simplekafka.Partition - Adding fetcher for partition [topic1,0], initOffset 0 to broker 1 with fetcherId -868034334
+19:39:48.315 [Thread-7] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Starting ReplicaFetcherThread ReplicaFetcherThread--868034334-1
+19:39:48.316 [Thread-7] INFO  com.dist.simplekafka.Partition$ReplicaFetcherThread - Fetching from leader broker 10.10.10.11:8000 for partition [topic1,0]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

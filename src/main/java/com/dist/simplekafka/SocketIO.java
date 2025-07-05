@@ -18,8 +18,11 @@ public class SocketIO<T> {
     public SocketIO(Socket clientSocket, Class<T> responseClass) throws SocketException {
         this.clientSocket = clientSocket;
         this.responseClass = responseClass;
-        this.clientSocket.setSoTimeout(500000);
+        // Use more reasonable timeout for replica fetching (30 seconds)
+        this.clientSocket.setSoTimeout(30000);
         this.clientSocket.setKeepAlive(true);
+        // Set TCP_NODELAY for better latency
+        this.clientSocket.setTcpNoDelay(true);
     }
 
     public void readHandleWithSocket(BiConsumer<T, Socket> handler) throws IOException {
